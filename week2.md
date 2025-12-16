@@ -6,10 +6,9 @@ Remote Monitoring Methodology
 
 My performance testing will use a dual-system approach where the workstation (boxuser@ubuntu) remotely monitors the server (asus123@asus). The methodology includes:
 
-
 Monitoring Tools Selection:
 
-top/htop: Real-time CPU and memory monitoring 
+top/htop: Real-time CPU and memory monitoring
 
 vmstat: System performance statistics
 
@@ -21,7 +20,7 @@ sysstat package: Historical performance data collection
 
 Custom scripts: For automated metric collection via SSH
 
-Testing Approach:
+  Testing Approach:
 
 Baseline Measurement: Capture system performance under idle conditions
 
