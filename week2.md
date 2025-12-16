@@ -1,161 +1,232 @@
 Week 2: Security Planning and Testing Methodology
 
-1. Performance Testing Plan
-   Remote Monitoring Methodology
-To evaluate system performance under different workloads, I will implement a remote monitoring approach using SSH-based data collection. The methodology will involve:
+2.1 Performance Testing Plan
 
-Baseline Measurement: Recording system metrics (CPU, RAM, disk I/O, network) under idle conditions
+Remote Monitoring Methodology
 
-Application Testing: Running selected applications while collecting performance data
-Comparative Analysis: Comparing performance across different workload types
+My performance testing will use a dual-system approach where the workstation (boxuser@ubuntu) remotely monitors the server (asus123@asus). The methodology includes:
 
-Testing Approach
-Tool Selection: Using sysstat package (specifically sar, iostat, mpstat) for comprehensive system monitoring
 
-Data Collection: Running monitoring scripts via SSH from the workstation to the server
+Monitoring Tools Selection:
 
-Metrics Tracked:
+top/htop: Real-time CPU and memory monitoring 
 
-CPU utilization (user, system, idle percentages)
+vmstat: System performance statistics
 
-Memory usage (used, free, cached, swap)
+iostat: Disk I/O performance tracking
 
-Disk I/O (read/write operations, throughput)
+nload/iftop: Network bandwidth monitoring
 
-Network (latency, bandwidth, packet loss)
+sysstat package: Historical performance data collection
 
-Testing Duration: Each test will run for 5 minutes with metrics collected at 10-second intervals
+Custom scripts: For automated metric collection via SSH
 
-Remote Execution Strategy
-All performance tests will be executed via SSH using pre-configured scripts. This ensures consistency and eliminates direct server access bias.
+Testing Approach:
 
-2. Security Configuration Checklist
-SSH Hardening
+Baseline Measurement: Capture system performance under idle conditions
+
+Application Load Testing: Monitor resource usage during application execution
+
+Stress Testing: Push system to limits using stress-ng tool
+
+Comparative Analysis: Compare performance across different workload types
+
+Continuous Monitoring: Scheduled data collection every 5 minutes during testing phases
+
+Data Collection Strategy:
+
+Performance metrics will be collected via SSH from workstation to server
+
+Data will be logged to CSV files for analysis
+
+Visualization using gnuplot or Python matplotlib
+
+Results will include quantitative metrics with timestamps
+
+2.2 Security Configuration Checklist
+1. SSH Hardening
 Disable root SSH login
 
-Use key-based authentication only
+Change default SSH port from 22 (Optional - for assessment)
 
-Change default SSH port (optional, for additional security)
+Implement key-based authentication
 
-Configure SSH timeout and max authentication attempts
+Disable password authentication
 
-Disable empty passwords
+Configure SSH session timeout
 
-Use strong ciphers and MAC algorithms
+Limit SSH access to specific IP (workstation: 192.168.56.1)
 
-Firewall Configuration
-Configure UFW (Uncomplicated Firewall) to allow only necessary ports
+Use strong encryption algorithms only
 
-Restrict SSH access to workstation IP only
+2. Firewall Configuration
+Configure ufw (Uncomplicated Firewall)
 
-Deny all incoming connections by default
+Allow SSH only from workstation IP
 
-Log dropped packets for monitoring
+Deny all other incoming connections
 
-Mandatory Access Control
-Install and configure AppArmor (chosen over SELinux for Ubuntu compatibility)
+Enable logging for firewall events
 
-Set profiles for key applications
+Set default policies: deny incoming, allow outgoing
 
-Configure audit logging for access violations
+3. Mandatory Access Control
+Install and configure AppArmor (Ubuntu default)
 
-Automatic Updates
-Configure unattended-upgrades for security patches
+Set profiles for critical applications
 
-Set update schedule (daily security updates)
+Enable enforcement mode
 
-Configure automatic reboot if required by kernel updates
+Regular audit of access control violations
 
-Verify update logs regularly
+4. Automatic Updates
+Configure automatic security updates
 
-User Privilege Management
-Create non-root administrative user with sudo privileges
+Schedule regular system updates
 
-Implement principle of least privilege
+Enable email notifications for updates
 
-Set password policies (complexity, expiration)
+Create update rollback plan
 
-Configure sudo timeout
+5. User Privilege Management
+Create non-root administrative user
 
-Network Security
+Implement sudo privileges with restrictions
+
+Regular audit of user accounts
+
+Password policy enforcement
+
+Remove unnecessary default accounts
+
+6. Network Security
 Disable unnecessary network services
 
-Configure TCP wrappers where applicable
+Configure IPTables for additional filtering
 
-Set up basic intrusion detection with fail2ban
+Implement fail2ban for intrusion prevention
 
-Implement port knocking for additional SSH security (optional)
+Regular port scanning audits
 
-3. Threat Model
+Network segmentation verification
+
+2.3 Threat Model
 Threat 1: Unauthorized SSH Access
-Description: Attackers attempting brute-force attacks on SSH service
+Description: Attackers attempting brute-force attacks on SSH service running on port 22.
 
-Attack Vector: Internet-facing SSH port with weak authentication
+Attack Vectors:
 
-Impact: Complete system compromise
+Password spraying attacks
 
-Mitigation Strategies:
+SSH vulnerability exploits (CVE-2024-6387)
 
-Implement key-based authentication only
+Credential stuffing using common passwords
 
-Configure fail2ban to block repeated failed attempts
+Impact:
 
-Restrict SSH access to specific IP addresses
+Unauthorized system access
 
-Use non-standard SSH port
+Data exfiltration
 
-Threat 2: Denial of Service (DoS)
-Description: Resource exhaustion attacks targeting server availability
-
-Attack Vector: Network floods or process exhaustion
-
-Impact: Service disruption, performance degradation
+System compromise and backdoor installation
 
 Mitigation Strategies:
 
-Configure firewall rate limiting
+Implement key-based authentication
 
-Implement system resource limits via ulimit
+Configure fail2ban to block repeated login attempts
 
-Use kernel parameters to resist SYN floods
+Change default SSH port (optional)
 
-Monitor for abnormal resource usage patterns
+Use firewall to restrict SSH to workstation IP only
+
+Regular SSH key rotation
+
+Threat 2: Denial of Service (DoS) Attacks
+Description: Resource exhaustion attacks targeting server availability.
+
+Attack Vectors:
+
+SYN flood attacks
+
+Application-layer attacks
+
+Resource exhaustion through malicious processes
+
+Impact:
+
+Service unavailability
+
+Performance degradation
+
+System instability
+
+Mitigation Strategies:
+
+Configure kernel parameters for DoS protection
+
+Implement rate limiting using iptables
+
+Monitor system resources with alerts
+
+Use ulimit to restrict process resources
+
+Regular backup of critical configurations
 
 Threat 3: Privilege Escalation
-Description: Attackers gaining unauthorized elevated privileges
+Description: Unauthorized elevation of user privileges to gain root access.
 
-Attack Vector: Exploiting vulnerabilities in services or misconfigurations
+Attack Vectors:
 
-Impact: Complete system control, data compromise
+Exploitation of sudo vulnerabilities
+
+Kernel exploits targeting CVE-2024-1086
+
+Misconfigured file permissions
+
+Impact:
+
+Complete system compromise
+
+Bypass of all security controls
+
+Installation of persistent malware
 
 Mitigation Strategies:
 
-Regular security updates
+Regular sudo configuration audits
 
-AppArmor mandatory access control
+Kernel updates and patch management
 
-Principle of least privilege for all services
+Principle of least privilege for all users
 
-Regular vulnerability scanning with Lynis
+SELinux/AppArmor enforcement
 
-Technical Implementation Evidence
-System Information Collection
-bash
-# Gather baseline system information
-uname -a
-free -h
-df -h
-ip addr show
-lsb_release -a
-Security Tools Installation
-bash
-# Install security and monitoring tools
-sudo apt update
-sudo apt install -y ufw fail2ban unattended-upgrades apparmor apparmor-utils sysstat
-Initial Security Configuration
-bash
-# Check AppArmor status
-sudo apparmor_status
+Regular security scanning with Lynis
 
-# Enable automatic security updates
-sudo dpkg-reconfigure --priority=low unattended-upgrades
+2.4 Implementation Roadmap
+Week 2 Completion Status:
+Performance testing methodology defined
+
+Security checklist created
+
+Threat model documented with 3 threats
+
+Begin initial security implementations (Week 4)
+
+Tools Identified for Implementation:
+SSH Hardening: ssh-keygen, ssh-copy-id, /etc/ssh/sshd_config
+
+Firewall: ufw, iptables-persistent
+
+Access Control: apparmor, aa-status
+
+Monitoring: sysstat, sar, custom Bash scripts
+
+Security Scanning: lynis, nmap, chkrootkit
+
+2.5 Risk Assessment Matrix
+Threat	Likelihood	Impact	Risk Level	Mitigation Priority
+SSH Brute Force	High	High	Critical	1
+DoS Attacks	Medium	High	High	2
+Privilege Escalation	Low	Critical	High	3
