@@ -9,75 +9,86 @@ ________________________________________
 🛠️ Configuration Steps & Evidence
 1. SSH Key-Based Authentication
 Before Configuration
-bash
+```bash
 # Default SSH settings (from workstation snapshot)
 Port 22
 PasswordAuthentication yes
 PermitRootLogin prohibit-password
+```
 ![ssh setting ](images/before-config.png)
 
 Default SSH configuration showing port 22 and password authentication enabled
 After Configuration
-bash
+```bash
 # Modified SSH settings
 Port 2222
 PermitRootLogin no
 PubkeyAuthentication yes
 AllowUsers asus123 sysadmin
+```
 ![ssh setting ](images/after-config.png)
 
 Hardened SSH configuration with custom port, disabled root login, and user restrictions
 Key Implementation Steps:
 1.	Generated 4096-bit RSA key pair on workstation:
-bash
+```bash
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/asus_server_key
+```
 2.	Copied public key to server:
-bash
+```bash
 ssh-copy-id -i ~/.ssh/asus_server_key.pub -p 22 asus123@192.168.56.103
+```
 3.	Modified /etc/ssh/sshd_config:
 o	Changed port from 22 to 2222
 o	Set PasswordAuthentication no
 o	Set PermitRootLogin no
 o	Added AllowUsers asus123 sysadmin
 4.	Restarted SSH service:
-bash
+```bash
 sudo systemctl restart ssh
+```
 ________________________________________
 2. Firewall Configuration
 Firewall Status
 ![Firewall Status ](images/Firewall-status.png)
 
-bash
+```bash
 Status: active
 To       Action  From
 2222/tcp ALLOW   192.168.56.1
+```
 UFW firewall configured to only allow port 2222 from the workstation IP (192.168.56.1)
 Implementation:
-bash
+```bash
 # Enable and configure firewall
 sudo ufw allow 2222/tcp
 sudo ufw allow from 192.168.56.1 to any port 2222
 sudo ufw --force enable
+```
 ________________________________________
 3. User Privilege Management
 Non-Root Administrative User
 ![User Privilege ](images/User-privilege.png)
 
-bash
+```bash
 User sysadmin may run the following commands on asus:
     (ALL : ALL) ALL
+```
 Created 'sysadmin' user with full sudo privileges
 Implementation Steps:
 1.	Created new user:
-bash
+```bash
 sudo adduser sysadmin
+```
 2.	Added to sudo group:
-bash
+```bash
 sudo usermod -aG sudo sysadmin
+```
 3.	Configured sudo privileges:
-bash
+```bash
 sudo visudo
 # Added: sysadmin ALL=(ALL:ALL) ALL
+```
 ________________________________________
 4. SSH Connection Verification
 Successful SSH Connection with Key
@@ -87,10 +98,11 @@ Successful SSH Connection with Key
 Root Access Verification
 ![root access ](images/root.png)
 
-bash
+```bash
 sudo whoami
 # Output: root
 Demonstrating ability to perform root actions via sudo while direct root login remains disabled
+```
 ________________________________________
 🔍 Configuration Verification Script
 Created verify-config.sh to validate all configurations:
@@ -119,9 +131,10 @@ ________________________________________
 SSH Service Status 
 ![ssh service ](images/ssh-service-status.png)
 
-bash
+```bash
 Active: active (running) since Wed 2025-12-17 11:54:38 UTC
 SSH service running and enabled to start on boot
+```
 ________________________________________
 🔐 Security Justification
 Why These Configurations Enhance Security
@@ -135,12 +148,13 @@ Sudo Privileges	Accountability and logging	sysadmin user with sudo access
 ________________________________________
 💻 Remote Administration Evidence
 All server administration was performed remotely via SSH as required:
-bash
+```bash
 # Example remote commands executed
 ssh -i ~/.ssh/asus_server_key -p 2222 asus123@192.168.56.103
 sudo apt update && sudo apt upgrade
 sudo systemctl status ssh
 sudo nano /etc/ssh/sshd_config
+```
 ________________________________________
 🚨 Challenges Encountered & Solutions
 Challenge 1: SSH Lockout Risk
@@ -215,4 +229,5 @@ ________________________________________
 3.	/etc/ssh/sshd_config - Modified SSH configuration (server)
 4.	/home/sysadmin/ - New user home directory (server)
 5.	verify-config.sh - Configuration verification script (server)
+
 
