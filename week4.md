@@ -5,8 +5,8 @@
 •	Implement firewall rules restricting access  
 •	Create non-root administrative users  
 •	Establish secure remote administration practices  
-________________________________________
-🛠️ Configuration Steps & Evidence
+________________________________________  
+Configuration Steps & Evidence
 1. SSH Key-Based Authentication
 Before Configuration
 ```bash
@@ -230,6 +230,7 @@ ________________________________________
 3.	/etc/ssh/sshd_config - Modified SSH configuration (server)
 4.	/home/sysadmin/ - New user home directory (server)
 5.	verify-config.sh - Configuration verification script (server)
+
 
 
 
