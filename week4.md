@@ -1,10 +1,10 @@
-Week 4: Initial System Configuration & Security Implementation
-📋 Overview
-This week focused on implementing foundational security controls for our Linux server. All configurations were performed remotely via SSH from the workstation, adhering to the assessment requirements. The key objectives were:
-•	Configure SSH with key-based authentication
-•	Implement firewall rules restricting access
-•	Create non-root administrative users
-•	Establish secure remote administration practices
+# Week 4: Initial System Configuration & Security Implementation  
+ Overview  
+ This week focused on implementing foundational security controls for our Linux server. All configurations were performed remotely via SSH from the workstation, adhering to the assessment requirements. The key objectives were:  
+•	Configure SSH with key-based authentication  
+•	Implement firewall rules restricting access  
+•	Create non-root administrative users  
+•	Establish secure remote administration practices  
 ________________________________________
 🛠️ Configuration Steps & Evidence
 1. SSH Key-Based Authentication
@@ -136,15 +136,15 @@ Active: active (running) since Wed 2025-12-17 11:54:38 UTC
 SSH service running and enabled to start on boot
 ```
 ________________________________________
-🔐 Security Justification
-Why These Configurations Enhance Security
-Configuration	Security Benefit	Implementation
-Port Change (22→2222)	Reduces automated attacks	Port 2222 in sshd_config
-Key-Based Authentication	Prevents brute force attacks	PasswordAuthentication no
-Root Login Disabled	Limits privilege escalation	PermitRootLogin no
-User Restrictions	Principle of least privilege	AllowUsers asus123 sysadmin
-Firewall Rules	Network segmentation	Only allow specific IP on port 2222
-Sudo Privileges	Accountability and logging	sysadmin user with sudo access
+#Security Justification  
+Why These Configurations Enhance Security  
+Configuration	Security Benefit	Implementation  
+Port Change (22→2222)	Reduces automated attacks	Port 2222 in sshd_config  
+Key-Based Authentication	Prevents brute force attacks	PasswordAuthentication no  
+Root Login Disabled	Limits privilege escalation	PermitRootLogin no  
+User Restrictions	Principle of least privilege	AllowUsers asus123 sysadmin  
+Firewall Rules	Network segmentation	Only allow specific IP on port 2222  
+Sudo Privileges	Accountability and logging	sysadmin user with sudo access  
 ________________________________________
 💻 Remote Administration Evidence
 All server administration was performed remotely via SSH as required:
@@ -156,13 +156,14 @@ sudo systemctl status ssh
 sudo nano /etc/ssh/sshd_config
 ```
 ________________________________________
-🚨 Challenges Encountered & Solutions
-Challenge 1: SSH Lockout Risk
-Problem: Changing SSH port and disabling password authentication simultaneously could result in lockout if key authentication failed.
-Solution: Tested key authentication BEFORE disabling password authentication. Maintained a separate VirtualBox console session as backup until configuration was verified.
-Challenge 2: Firewall Configuration
-Problem: Incorrect firewall rules could block legitimate access.
-Solution: Used incremental approach:
+# Challenges Encountered & Solutions  
+Challenge 1: SSH Lockout Risk  
+Problem: Changing SSH port and disabling password authentication simultaneously could result in lockout if key authentication failed.  
+Solution: Tested key authentication BEFORE disabling password authentication. Maintained a separate VirtualBox console session as backup until configuration was verified.  
+Challenge 2: Firewall Configuration  
+Problem: Incorrect firewall rules could block legitimate access.  
+
+Solution: Used incremental approach:  
 1.	Allow SSH from any IP temporarily
 2.	Test connection
 3.	Restrict to specific IP
@@ -172,8 +173,8 @@ Challenge 3: User Privilege Escalation
 Problem: Ensuring new user has appropriate sudo privileges without compromising security.
 Solution: Used visudo command to safely edit sudoers file and verified with sudo -lU username.
 ________________________________________
-📈 Learning Outcomes
-Technical Skills Developed:
+#Learning Outcomes  
+Technical Skills Developed:  
 1.	SSH Configuration Management: Learned to secure remote access through key-based authentication, port changes, and user restrictions.
 2.	Firewall Implementation: Gained experience with UFW to create restrictive firewall policies.
 3.	User Management: Understood Linux user/group management and sudo privilege delegation.
@@ -203,31 +204,32 @@ sudo cat /etc/ufw/user.rules
 # Rule: Allow 2222/tcp from 192.168.56.1 only
 ```
 ________________________________________
-Verification Checklist
-Requirement	Status	Evidence
-SSH on non-default port	✓	Port 2222 configured
-Key-based authentication	✓	PasswordAuthentication no
-Root login disabled	✓	PermitRootLogin no
-Firewall active	✓	UFW status active
-Restricted firewall rules	✓	Only port 2222 from workstation IP
-Non-root admin user	✓	sysadmin with sudo privileges
-Remote administration	✓	All commands via SSH
-Service running	✓	SSH service active
+#Verification Checklist  
+Requirement	Status	Evidence  
+SSH on non-default port	✓	Port 2222 configured  
+Key-based authentication	✓	PasswordAuthentication no  
+Root login disabled	✓	PermitRootLogin no  
+Firewall active	✓	UFW status active  
+Restricted firewall rules	✓	Only port 2222 from workstation IP  
+Non-root admin user	✓	sysadmin with sudo privileges  
+Remote administration	✓	All commands via SSH  
+Service running	✓	SSH service active  
 ________________________________________
-Reflection
-Week 4 provided practical experience in implementing fundamental Linux server security. The most valuable lesson was understanding how individual security controls (firewall, SSH hardening, user management) work together to create a defense-in-depth strategy.
-Key Takeaways:
+#Reflection  
+Week 4 provided practical experience in implementing fundamental Linux server security. The most valuable lesson was understanding how individual security controls (firewall, SSH hardening, user management) work together to create a defense-in-depth strategy.  
+Key Takeaways:  
 1.	Testing is Critical: Always test configurations incrementally to avoid lockout
 2.	Documentation Matters: Keeping detailed records of changes aids troubleshooting
 3.	Security vs. Usability: Finding the right balance between strict security and practical access
 4.	Automation Benefits: Verification scripts save time and ensure consistency
 This foundational security implementation sets the stage for advanced security controls in Week 5, where we'll implement AppArmor, fail2ban, and automated security monitoring.
 ________________________________________
- Files Created This Week
+ #Files Created This Week
 1.	~/.ssh/asus_server_key - SSH private key (workstation)
 2.	~/.ssh/asus_server_key.pub - SSH public key (workstation)
 3.	/etc/ssh/sshd_config - Modified SSH configuration (server)
 4.	/home/sysadmin/ - New user home directory (server)
 5.	verify-config.sh - Configuration verification script (server)
+
 
 
