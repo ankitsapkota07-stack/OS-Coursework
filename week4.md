@@ -12,7 +12,7 @@ Before Configuration
 ```bash
 # Default SSH settings (from workstation snapshot)
 Port 22
-PasswordAuthentication yes
+Pubkeyauthentication yes
 PermitRootLogin prohibit-password
 ```
 ![ssh setting ](images/before-config.png)
@@ -230,6 +230,7 @@ ________________________________________
 3.	/etc/ssh/sshd_config - Modified SSH configuration (server)
 4.	/home/sysadmin/ - New user home directory (server)
 5.	verify-config.sh - Configuration verification script (server)
+
 
 
 
