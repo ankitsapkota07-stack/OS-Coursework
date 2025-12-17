@@ -103,8 +103,8 @@ sudo whoami
 # Output: root
 Demonstrating ability to perform root actions via sudo while direct root login remains disabled
 ```
-________________________________________
-🔍 Configuration Verification Script
+________________________________________  
+Configuration Verification Script
 Created verify-config.sh to validate all configurations:
 ```
 bash
@@ -126,8 +126,8 @@ systemctl status ssh --no-pager | head -10
 ![completesetting ](images/complete-week-4-configuration.png)
 
 Output of verification script confirming all configurations are correctly applied
-________________________________________
-📊 Service Status Verification
+________________________________________  
+Service Status Verification
 SSH Service Status 
 ![ssh service ](images/ssh-service-status.png)
 
@@ -135,7 +135,7 @@ SSH Service Status
 Active: active (running) since Wed 2025-12-17 11:54:38 UTC
 SSH service running and enabled to start on boot
 ```
-________________________________________
+________________________________________  
 #Security Justification  
 Why These Configurations Enhance Security  
 Configuration	Security Benefit	Implementation  
@@ -145,8 +145,8 @@ Root Login Disabled	Limits privilege escalation	PermitRootLogin no
 User Restrictions	Principle of least privilege	AllowUsers asus123 sysadmin  
 Firewall Rules	Network segmentation	Only allow specific IP on port 2222  
 Sudo Privileges	Accountability and logging	sysadmin user with sudo access  
-________________________________________
-💻 Remote Administration Evidence
+________________________________________  
+Remote Administration Evidence
 All server administration was performed remotely via SSH as required:
 ```bash
 # Example remote commands executed
@@ -184,8 +184,8 @@ Security Concepts Applied:
 •	Principle of Least Privilege: Users only have necessary permissions
 •	Security through Obscurity: Changing default port 22
 •	Accountability: Sudo logging for audit trails
-________________________________________
-🔗 Configuration Files
+________________________________________  
+Configuration Files
 /etc/ssh/sshd_config (Excerpt)
 ```
 bash
@@ -230,6 +230,7 @@ ________________________________________
 3.	/etc/ssh/sshd_config - Modified SSH configuration (server)
 4.	/home/sysadmin/ - New user home directory (server)
 5.	verify-config.sh - Configuration verification script (server)
+
 
 
 
