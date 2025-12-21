@@ -201,7 +201,7 @@ TCP parameter adjustments specifically benefit:
 1.	Web server performance: Faster connection recycling
 2.	Network-intensive applications: Better buffer management
 3.	System responsiveness: Reduced network-related delays
-_____________________________________
+
 # 9. Testing Evidence Documentation  
 Files Generated  
 1.	cpu_baseline.txt - Idle CPU measurements
@@ -216,7 +216,7 @@ Screenshot: : ![ssh setting ](images/week-6-baseline.png)
 Command Execution Evidence
 All commands executed with visible terminal prompts showing asus123@asus host identification
 Example:  ![ssh setting ](images/week-6-save-commands.png)
-________________________________________
+
 # 10. Critical Analysis  
 Trade-offs Identified  
 1.	Security vs. Performance: SSH hardening (port 2222) adds minor connection overhead
@@ -232,7 +232,7 @@ Lessons Learned
 2.	Virtual environments introduce unique constraints vs. physical hardware
 3.	Small optimizations can significantly impact system behavior
 4.	Documentation is critical for reproducible results
-________________________________________
+
 # 11. Quantitative Improvements  
 Optimization	Parameter	Before	After	Improvement  
 TCP Timeout	tcp_fin_timeout	60s	30s	50% reduction  
@@ -256,5 +256,6 @@ Professional Development
 •	Learned to document technical results for reproducibility
 •	Gained experience with industry-standard benchmarking tools
 •	Understood the importance of baseline measurements
+
 
 
