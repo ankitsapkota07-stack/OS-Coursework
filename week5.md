@@ -78,7 +78,7 @@ Initial Connection Issues:
 Encountered SSH connection timeout due to custom port configuration (2222 instead of default 22).  
 
 Screenshot:
-https://week-5.png  
+![ssh setting ](images/week-5.png) 
 
 Resolution:  
 Created a workstation-based version that connects via the correct port:  
@@ -215,4 +215,5 @@ Understanding the challenges of remote administration via SSH
 Balancing security hardening with system usability  
 Creating professional monitoring solutions that mimic real-world DevOps practices  
 The dual-script approach (security verification and performance monitoring) demonstrates a comprehensive understanding of system administration responsibilities, where both security posture and system health must be continuously assessed.
+
 
