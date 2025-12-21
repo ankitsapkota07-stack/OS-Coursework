@@ -213,9 +213,9 @@ Firewall active	✓	UFW status active
 Restricted firewall rules	✓	Only port 2222 from workstation IP  
 Non-root admin user	✓	sysadmin with sudo privileges  
 Remote administration	✓	All commands via SSH  
-Service running	✓	SSH service active  
-________________________________________
-#Reflection  
+Service running	✓	SSH service active    
+
+# Reflection  
 Week 4 provided practical experience in implementing fundamental Linux server security. The most valuable lesson was understanding how individual security controls (firewall, SSH hardening, user management) work together to create a defense-in-depth strategy.  
 Key Takeaways:  
 1.	Testing is Critical: Always test configurations incrementally to avoid lockout
@@ -223,13 +223,14 @@ Key Takeaways:
 3.	Security vs. Usability: Finding the right balance between strict security and practical access
 4.	Automation Benefits: Verification scripts save time and ensure consistency
 This foundational security implementation sets the stage for advanced security controls in Week 5, where we'll implement AppArmor, fail2ban, and automated security monitoring.
-________________________________________
- #Files Created This Week
+
+  #Files Created This Week  
 1.	~/.ssh/asus_server_key - SSH private key (workstation)
 2.	~/.ssh/asus_server_key.pub - SSH public key (workstation)
 3.	/etc/ssh/sshd_config - Modified SSH configuration (server)
 4.	/home/sysadmin/ - New user home directory (server)
 5.	verify-config.sh - Configuration verification script (server)
+
 
 
 
