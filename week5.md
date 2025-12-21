@@ -81,7 +81,7 @@ Screenshot:
 ![ssh setting ](images/week-5.png) 
 
 Resolution:  
-Created a workstation-based version that connects via the correct port:  
+Created a  version that connects via the correct port:  
 
 security-workstation.sh:  
 ```
@@ -215,5 +215,6 @@ Understanding the challenges of remote administration via SSH
 Balancing security hardening with system usability  
 Creating professional monitoring solutions that mimic real-world DevOps practices  
 The dual-script approach (security verification and performance monitoring) demonstrates a comprehensive understanding of system administration responsibilities, where both security posture and system health must be continuously assessed.
+
 
 
