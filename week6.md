@@ -105,7 +105,7 @@ Challenge: iperf3 server not running on workstation
 Learning: Network testing requires both server and client components  
 Alternative: Documented network latency via ping instead  
 Screenshot: : ![ssh setting ](images/week-6-iperf3-output.png)  
-________________________________________
+
 # 4. Performance Data Table  
 ## 4. Performance Data Table
 
@@ -122,7 +122,7 @@ Source Data:
 •	CPU baseline:  ![ssh setting ](images/week-6-commad-to-save-data.png)    
 •	Memory: ![ssh setting ](images/week-6-memory-stat.png)    
 •	Web server:  ![ssh setting ](images/week-6-table-for-journal.png)    
-________________________________________
+
 # 5. Performance Visualizations
 CPU Usage Comparison  
 Baseline:    [■] 0.1%  
@@ -149,7 +149,7 @@ Performance Characteristics
 •	Memory-bound tasks: Performance degrades near capacity limits
 •	I/O-bound tasks: Virtual disk shows excellent throughput for sequential operations
 •	Network-bound tasks: Minimal latency impact from virtualization
-________________________________________
+
 # 7. Optimization Testing  
 Optimization 1: TCP Network Parameters  
 ```
@@ -180,7 +180,7 @@ Post-Optimization Results
 •	System responsiveness: Improved under memory pressure  
 •	Network connection handling: More efficient with higher concurrent connections  
 •	Memory management: Reduced unnecessary swapping  
-________________________________________
+
 # 8. Network Performance Analysis  
 Latency Testing
 ```
@@ -243,7 +243,7 @@ Overall System Impact:
 •	Web server performance: 1.8% improvement (3044 to 3100 req/sec)  
 •	Memory efficiency: Reduced swap usage under load  
 •	Network responsiveness: Faster connection handling  
-________________________________________
+
 # 12. Learning Reflection  
 This week provided valuable insights into operating system performance characteristics:  
 Key Learnings  
@@ -256,6 +256,7 @@ Professional Development
 •	Learned to document technical results for reproducibility
 •	Gained experience with industry-standard benchmarking tools
 •	Understood the importance of baseline measurements
+
 
 
 
