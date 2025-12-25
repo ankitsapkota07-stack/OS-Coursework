@@ -1,6 +1,6 @@
-Week 3: Application Selection for Performance Testing
+# Week 3: Application Selection for Performance Testing
 
-3.1 Application Selection Matrix
+# 3.1 Application Selection Matrix
 
 Application	Workload Type	Purpose	Justification
 
@@ -343,3 +343,4 @@ Python pandas for data analysis
 Excel/Google Sheets for final reporting
 
 Manual review for anomaly detection
+
