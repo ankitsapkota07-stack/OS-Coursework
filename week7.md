@@ -4,23 +4,25 @@ This week focused on conducting a comprehensive security audit of the Linux serv
 # 1. Lynis Security Scanning
 # Initial Security Assessment
 I began by running Lynis, a security auditing tool, to identify potential vulnerabilities and security misconfigurations:
-https://images/week-7-lynis-command-execution.png
+![System Architecture](images/week-7-lynis-command-execution.png)
 # Hardening Index Results
 The Lynis scan revealed a hardening index of 65/100, indicating moderate security posture with room for improvement:
-https://images/week-7-lynis-hardening-index.png
+![System Architecture](images/week-7-lynis-hardening-index.png)
 # Key Findings and Recommendations
 The scan identified several areas for improvement:
 •	LYNIS-0000: Lynis version is more than 4 months old (update recommended)
 •	BOOT-5122: No password set on GRUB boot loader
 •	DEB-0280: Missing libpam-tmpdir for secure PAM sessions
 •	DEB-0810: Missing apt-listbugs for critical bug notifications
-https://images/week-7-lynis-showing-vulnerabilities.png
+![System Architecture](images/week-7-lynis-showing-vulnerabilities.png)
 # 2. Network Security Assessment
 Nmap Port Scanning
 Conducted network security assessment using Nmap to identify open ports and services:
+```
 bash
 sudo nmap -sS 192.168.56.103
-https://images/week-7-nmap-scan-results.png
+```
+![System Architecture](images/week-7-nmap-scan-results.png)
 Port Analysis Results
 •	Port 80/tcp (HTTP): Open - Running nginx web server
 •	Port 2222/tcp: Open - Custom SSH port for secure access
@@ -29,10 +31,10 @@ Port Analysis Results
 # 3. Access Control Verification
 SSH Key-Based Authentication
 Verified that SSH key-based authentication is properly configured and functional:
-https://images/week-7-authorized-keys-on-server.png
+![System Architecture](images/week-7-authorized-keys-on-server.png)
 # SSH Security Configuration
 Confirmed SSH security hardening measures:
-https://images/week-7-ssh-verification.png
+![System Architecture](images/week-7-ssh-verification.png)
 Key SSH configurations verified:
 •	Port 2222: Non-standard SSH port
 •	PermitRootLogin no: Root login disabled
@@ -40,14 +42,14 @@ Key SSH configurations verified:
 •	Protocol 2: Only SSH protocol 2 allowed
 # User Access Controls
 Checked sudo privileges and SSH access controls:
-https://images/week-7-access-control-verification.png
+![System Architecture](images/week-7-access-control-verification.png)
 •	sudo group includes: asus123, sysadmin
 •	SSH AllowUsers: asus123, sysadmin
 •	Proper privilege separation implemented
 # 4. Service Audit and Justification
 Running Services Analysis
 Conducted a comprehensive audit of all running services:
-https://images/week-7-list-0f-running-services.png
+![System Architecture](images/week-7-list-0f-running-services.png)
 Service Justification
 Service	Justification	Security Assessment
 cron	Essential for scheduled tasks	Required, properly secured
@@ -61,11 +63,11 @@ systemd- services*	Core system services	Required for system operation
 udisks2	Disk management	Required for storage management
 SSH Service Status
 Verified SSH service is running properly with appropriate resource usage:
-https://images/week-7-ssh-service-status.png
+![System Architecture](images/week-7-ssh-service-status.png)
 # 5. Firewall Configuration Review
 UFW Status and Rules
 Reviewed firewall configuration and rules:
-https://images/week-7-firewall-status.png
+![System Architecture](images/week-7-firewall-status.png)
 Firewall Rules Analysis
 •	Status: Active
 •	Default policy: Deny incoming, allow outgoing
@@ -76,7 +78,7 @@ o	Allow SSH (port 2222) from 192.168.56.104
 # 6. Security Audit Report
 Comprehensive Security Summary
 Generated a final security audit report:
-https://images/week-7-security-audit-report.png
+![System Architecture](images/week-7-security-audit-report.png)
 Audit Results Summary
 text
 === WEEK 7 SECURITY AUDIT SUMMARY ===
@@ -106,7 +108,7 @@ sudo apt install libpam-tmpdir apt-listbugs apt-listchanges
 4.	Reviewed and documented all SUID/SGID binaries
 SSH Key Authentication Verification
 Tested key-based authentication to ensure proper functionality:
-https://images/week-7-sucessful-key-based-authentication.png
+![System Architecture](images/week-7-sucessful-key-based-authentication.png)
 # 8. Risk Assessment and Remaining Vulnerabilities
 Residual Risk Analysis
 Risk Level	Vulnerability	Mitigation Status
@@ -145,4 +147,5 @@ Key achievements include:
 •	✅ Automatic security updates enabled
 •	✅ Intrusion detection active with fail2ban
 The audit process highlighted the importance of continuous security monitoring and the need for regular vulnerability assessments. The implemented security controls provide a robust defense against common threats while maintaining necessary system functionality for the server's intended purpose.
+
 
